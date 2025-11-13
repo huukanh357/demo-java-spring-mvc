@@ -2,12 +2,15 @@ package com.example.java_spring_mvc.domain;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "products")
@@ -15,18 +18,33 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotEmpty(message = "Tên sản phẩm không được để trống")
     private String name;
+
+    @Positive(message = "Giá sản phẩm phải lớn hơn 0")
     private double price;
     private String image;
+
+    @Column(columnDefinition = "MEDIUMTEXT")
+    @NotEmpty(message = "Miêu tả chi tiết không được để trống")
     private String detailDesc;
+
+    @NotEmpty(message = "Miêu tả ngắn không được để trống")
     private String shortDesc;
+
+    @Positive(message = "Số lượng sản phẩm phải lớn hơn 0")
     private long quantity;
+
     private long sold;
     private String factory;
     private String target;
 
     @OneToMany(mappedBy = "product")
     private List<OrderDetail> order_details;
+
+    public Product() {
+    }
 
     public Product(long id, String name, double price, String image, String detailDesc, String shortDesc, long quantity,
             long sold, String factory, String target) {

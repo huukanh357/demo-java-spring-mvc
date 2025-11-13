@@ -27,6 +27,9 @@ public class Role {
         this.description = description;
     }
 
+    public Role() {
+    }
+
     public long getId() {
         return id;
     }
