@@ -6,7 +6,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,7 +39,7 @@ public class UserController {
         List<User> users = this.userService.getAllUseres();
         // System.out.println(users);
         model.addAttribute("users1", users);
-        return "/admin/user/show";
+        return "admin/user/show";
     }
 
     @RequestMapping("/admin/user/create")
@@ -55,10 +54,11 @@ public class UserController {
             BindingResult newUserBindingResult,
             @RequestParam("gicungdcFile") MultipartFile file) {
 
-        List<FieldError> errors = newUserBindingResult.getFieldErrors();
-        for (FieldError e : errors) {
-            System.out.println(">>>>>>>>> " + e.getField() + " - " + e.getDefaultMessage());
-        }
+        // List<FieldError> errors = newUserBindingResult.getFieldErrors();
+        // for (FieldError e : errors) {
+        // System.out.println(">>>>>>>>> " + e.getField() + " - " +
+        // e.getDefaultMessage());
+        // }
 
         String hashPassword = this.passwordEncoder.encode(huukhanh.getPassword());
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");

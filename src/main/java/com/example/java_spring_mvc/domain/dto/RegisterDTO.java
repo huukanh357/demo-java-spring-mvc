@@ -1,6 +1,12 @@
 package com.example.java_spring_mvc.domain.dto;
 
+import com.example.java_spring_mvc.service.validator.RegisterChecked;
+
+import jakarta.validation.constraints.Size;
+
+@RegisterChecked
 public class RegisterDTO {
+    @Size(min = 3)
     private String firstName;
     private String lastName;
     private String email;
